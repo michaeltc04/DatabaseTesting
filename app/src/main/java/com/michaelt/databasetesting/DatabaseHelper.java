@@ -139,11 +139,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             if (db != null) {
                 db.beginTransaction();
                 for (int i = 0; i < hopsArray.size(); i++) {
-                    String name = hopsArray.get(i).getName();
-                    String acid = hopsArray.get(i).getAlphaAcid();
-                    values.put(DatabaseHelper.HopsTableInfo.NAME, name);
-                    values.put(DatabaseHelper.HopsTableInfo.ALPHA_ACID, acid);
-                    new InsertTask().execute(values);
+                    values.put(DatabaseHelper.HopsTableInfo.NAME, hopsArray.get(i).getName());
+                    values.put(DatabaseHelper.HopsTableInfo.ALPHA_ACID, hopsArray.get(i).getAlphaAcid());
+                    db.insert(DatabaseHelper.HopsTableInfo.TABLE_NAME, DatabaseHelper.HopsTableInfo.NAME, values);
                     values.clear();
                 }
                 db.setTransactionSuccessful();

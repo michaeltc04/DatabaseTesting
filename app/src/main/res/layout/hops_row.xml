@@ -12,14 +12,16 @@
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content"
       android:layout_alignParentLeft="true"
+      android:gravity="center"
       tools:text="test text"
       android:textColor="@color/white" />
 
   <TextView
       android:id="@+id/alpha_acid"
       android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
+      android:layout_height="wrap_content"
       android:layout_alignParentRight="true"
+      android:gravity="center"
       tools:text="test text"
       android:textColor="@color/white" />
 
