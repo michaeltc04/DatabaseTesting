@@ -12,19 +12,19 @@ public class Malts {
         this.myType = theType;
     }
 
-    public String getMyName() {
+    public String getName() {
         return myName;
     }
 
-    public void setMyName(String theName) {
+    public void setName(String theName) {
         this.myName = theName;
     }
 
-    public String getMyType() {
+    public String getType() {
         return myType;
     }
 
-    public void setMyType(String theType) {
+    public void setType(String theType) {
         this.myType = theType;
     }
 }

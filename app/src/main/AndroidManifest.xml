@@ -3,6 +3,7 @@
     package="com.michaelt.databasetesting" >
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -31,6 +32,10 @@
         <activity
             android:name=".YeastsActivity"
             android:label="@string/title_activity_yeasts" >
+        </activity>
+        <activity
+            android:name=".CreateRecipeActivity"
+            android:label="@string/title_activity_create_recipe">
         </activity>
     </application>
 

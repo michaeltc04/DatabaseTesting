@@ -8,16 +8,7 @@
     android:background="@color/black">
 
   <TextView
-      android:id="@+id/hops_name"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      android:layout_weight="1"
-      tools:text="test text"
-      android:textColor="@color/white" />
-
-  <TextView
-      android:id="@+id/alpha_acid"
+      android:id="@+id/recipe_name"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:gravity="center"

@@ -21,16 +21,20 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 import android.provider.BaseColumns;
+import android.provider.ContactsContract;
 import android.widget.CursorAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "recipes.db";
     private static final int DATABSE_VERSION = 1;
+    private SQLiteDatabase mDB;
     public static final String ID = "_id";
     private static DatabaseHelper sInstance;
+    private boolean mResult;
 
     public static synchronized DatabaseHelper getInstance(Context context) {
         if (sInstance == null) {
@@ -51,11 +55,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
+        mDB = db;
         db.execSQL(HopsTableInfo.CREATE_HOPS_TABLE_QUERY);
         db.execSQL(YeastsTableInfo.CREATE_YEASTS_TABLE_QUERY);
         db.execSQL(GrainsTableInfo.CREATE_GRAINS_TABLE_QUERY);
-        populateHops(db);
-
+        db.execSQL(RecipesTableInfo.CREATE_RECIPES_TABLE_QUERY);
+        populateHops();
+        populateYeasts();
+        populateMalts();
+        //populateRecipes();
     }
 
     /**
@@ -83,6 +91,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + HopsTableInfo.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + YeastsTableInfo.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + GrainsTableInfo.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + RecipesTableInfo.TABLE_NAME);
         onCreate(db);
     }
 
@@ -92,7 +101,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         public static final String ALPHA_ACID= "alpha_acid";
 
         public static final String CREATE_HOPS_TABLE_QUERY =    "CREATE TABLE " + DatabaseHelper.HopsTableInfo.TABLE_NAME + "(" +
-                                                                DatabaseHelper.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+//                                                                DatabaseHelper.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                                                                 DatabaseHelper.HopsTableInfo.NAME + " TEXT, " +
                                                                 DatabaseHelper.HopsTableInfo.ALPHA_ACID + " TEXT);";
 
@@ -106,7 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         public static final String FERMENTING_TEMPERATURE = "fermenting_temperature";
 
         public static final String CREATE_YEASTS_TABLE_QUERY =  "CREATE TABLE " + DatabaseHelper.YeastsTableInfo.TABLE_NAME + "(" +
-                                                                DatabaseHelper.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+//                                                                DatabaseHelper.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                                                                 DatabaseHelper.YeastsTableInfo.NAME + " TEXT, " +
                                                                 DatabaseHelper.YeastsTableInfo.ATTENUATION + " TEXT, " +
                                                                 DatabaseHelper.YeastsTableInfo.FLOCCULATION + " TEXT, " +
@@ -119,13 +128,71 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         public static final String TYPE = "type";
 
         public static final String CREATE_GRAINS_TABLE_QUERY =  "CREATE TABLE " + DatabaseHelper.GrainsTableInfo.TABLE_NAME + "(" +
-                                                                DatabaseHelper.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+//                                                                DatabaseHelper.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                                                                 DatabaseHelper.GrainsTableInfo.NAME + " TEXT, " +
                                                                 DatabaseHelper.GrainsTableInfo.TYPE + " TEXT);";
     }
 
-    public boolean populateHops(SQLiteDatabase db) {
-        boolean result = false;
+    public static abstract class RecipesTableInfo implements BaseColumns {
+        public static final String TABLE_NAME = "Recipes";
+        public static final String NAME = "name";
+        public static final String BOIL_TIME = "boil_time";
+        public static final String MASH = "mash";
+        public static final String MASH_TEMP = "mash_temp";
+        public static final String SPARGE = "sparge";
+        public static final String FERMENT_TIME = "ferment_time_weeks";
+        public static final String SECONDARY_FERMENT = "secondary_ferment";
+        public static final String SECONDARY_FERMENT_TIME = "secondary_ferment_time_weeks";
+        public static final String MALT_1 = "malt_1";
+        public static final String MALT_2 = "malt_2";
+        public static final String MALT_3 = "malt_3";
+        public static final String MALT_4 = "malt_4";
+        public static final String MALT_5 = "malt_5";
+        public static final String HOPS_1 = "hops_1";
+        public static final String HOPS_1_TIME = "hops_time_1";
+        public static final String HOPS_2 = "hops_2";
+        public static final String HOPS_2_TIME = "hops_time_2";
+        public static final String HOPS_3 = "hops_3";
+        public static final String HOPS_3_TIME = "hops_time_3";
+        public static final String HOPS_4 = "hops_4";
+        public static final String HOPS_4_TIME = "hops_time_4";
+        public static final String HOPS_5 = "hops_5";
+        public static final String HOPS_5_TIME = "hops_time_5";
+        public static final String HOPS_6 = "hops_6";
+        public static final String HOPS_6_TIME = "hops_time_6";
+        public static final String YEAST = "yeast";
+
+        public static final String CREATE_RECIPES_TABLE_QUERY =  "CREATE TABLE " + DatabaseHelper.RecipesTableInfo.TABLE_NAME + "(" +
+//                                                                DatabaseHelper.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                                                                DatabaseHelper.RecipesTableInfo.NAME + " TEXT, " +
+                                                                DatabaseHelper.RecipesTableInfo.BOIL_TIME + " INT, " +
+                                                                DatabaseHelper.RecipesTableInfo.MASH + " INT, " +  //0 - false, 1 - true
+                                                                DatabaseHelper.RecipesTableInfo.MASH_TEMP + " INT, " +
+                                                                DatabaseHelper.RecipesTableInfo.SPARGE + " INT, " + //0 - false, 1 - true
+                                                                DatabaseHelper.RecipesTableInfo.FERMENT_TIME + " REAL, " +
+                                                                DatabaseHelper.RecipesTableInfo.SECONDARY_FERMENT + " INT, " +//0 - false, 1 - true
+                                                                DatabaseHelper.RecipesTableInfo.SECONDARY_FERMENT_TIME + " REAL, " +
+                                                                DatabaseHelper.RecipesTableInfo.MALT_1 + " TEXT, " +
+                                                                DatabaseHelper.RecipesTableInfo.MALT_2 + " TEXT, " +
+                                                                DatabaseHelper.RecipesTableInfo.MALT_3 + " TEXT, " +
+                                                                DatabaseHelper.RecipesTableInfo.MALT_4 + " TEXT, " +
+                                                                DatabaseHelper.RecipesTableInfo.MALT_5 + " TEXT, " +
+                                                                DatabaseHelper.RecipesTableInfo.HOPS_1 + " TEXT, " +
+                                                                DatabaseHelper.RecipesTableInfo.HOPS_1_TIME + " INT, " +
+                                                                DatabaseHelper.RecipesTableInfo.HOPS_2 + " TEXT, " +
+                                                                DatabaseHelper.RecipesTableInfo.HOPS_2_TIME + " INT, " +
+                                                                DatabaseHelper.RecipesTableInfo.HOPS_3 + " TEXT, " +
+                                                                DatabaseHelper.RecipesTableInfo.HOPS_3_TIME + " INT, " +
+                                                                DatabaseHelper.RecipesTableInfo.HOPS_4 + " TEXT, " +
+                                                                DatabaseHelper.RecipesTableInfo.HOPS_4_TIME + " INT, " +
+                                                                DatabaseHelper.RecipesTableInfo.HOPS_5 + " TEXT, " +
+                                                                DatabaseHelper.RecipesTableInfo.HOPS_5_TIME + " INT, " +
+                                                                DatabaseHelper.RecipesTableInfo.HOPS_6 + " TEXT, " +
+                                                                DatabaseHelper.RecipesTableInfo.HOPS_6_TIME + " INT, " +
+                                                                DatabaseHelper.RecipesTableInfo.YEAST + " TEXT);";
+    }
+
+    public boolean populateHops() {
         ContentValues values = new ContentValues();
         ArrayList<Hops> hopsArray = new ArrayList<Hops>();
         Hops hops;
@@ -136,64 +203,166 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         hops = new Hops("Centennial", "9-11.5%");
         hopsArray.add(hops);
         try {
-            if (db != null) {
-                db.beginTransaction();
-                for (int i = 0; i < hopsArray.size(); i++) {
+            if (mDB != null) {
+                mDB.beginTransaction();
+                for(int i = 0; i < hopsArray.size(); i++) {
                     values.put(DatabaseHelper.HopsTableInfo.NAME, hopsArray.get(i).getName());
                     values.put(DatabaseHelper.HopsTableInfo.ALPHA_ACID, hopsArray.get(i).getAlphaAcid());
-                    db.insert(DatabaseHelper.HopsTableInfo.TABLE_NAME, DatabaseHelper.HopsTableInfo.NAME, values);
-                    values.clear();
+                    mDB.insert(DatabaseHelper.HopsTableInfo.TABLE_NAME, DatabaseHelper.HopsTableInfo.NAME, values);
                 }
-                db.setTransactionSuccessful();
-                result = true;
+                mDB.setTransactionSuccessful();
+                mResult = true;
             }
-            return result;
+            return mResult;
         } finally {
-            db.endTransaction();
+            mDB.endTransaction();
         }
+    }
+
+    public boolean populateMalts() {
+        ContentValues values = new ContentValues();
+        ArrayList<Malts> maltsArray = new ArrayList<Malts>();
+        Malts malt;
+        malt = new Malts("2 Row", "Base");
+        maltsArray.add(malt);
+        malt = new Malts("Flaked Barley", "Adjunct/Flaked");
+        maltsArray.add(malt);
+        malt = new Malts("Caramel 60L", "Caramel/Crystal");
+        maltsArray.add(malt);
+        malt = new Malts("Honey Malt", "Caramel/Crystal");
+        maltsArray.add(malt);
+        malt = new Malts("Midnight Wheat", "Kilned/Toasted");
+        maltsArray.add(malt);
+        malt = new Malts("Chocolate", "Kilned/Toasted");
+        maltsArray.add(malt);
+        malt = new Malts("Golden Light", "DME");
+        maltsArray.add(malt);
+        malt = new Malts("Amber", "LME");
+        maltsArray.add(malt);
+        malt = new Malts("Sparkling Amber", "DME");
+        maltsArray.add(malt);
+        malt = new Malts("Pilsner", "Base");
+        maltsArray.add(malt);
+        malt = new Malts("White Wheat", "Base");
+        maltsArray.add(malt);
+        try {
+            if (mDB != null) {
+                mDB.beginTransaction();
+                for(int i = 0; i < maltsArray.size(); i++) {
+                    values.put(DatabaseHelper.GrainsTableInfo.NAME, maltsArray.get(i).getName());
+                    values.put(DatabaseHelper.GrainsTableInfo.TYPE, maltsArray.get(i).getType());
+                    mDB.insert(DatabaseHelper.GrainsTableInfo.TABLE_NAME, DatabaseHelper.HopsTableInfo.NAME, values);
+                }
+                mDB.setTransactionSuccessful();
+                mResult = true;
+            }
+            return mResult;
+        } finally {
+            mDB.endTransaction();
+        }
+    }
+
+    public boolean populateYeasts() {
+        ContentValues values = new ContentValues();
+        ArrayList<Yeasts> yeastsArray = new ArrayList<Yeasts>();
+        Yeasts yeast;
+        yeast = new Yeasts("WL008", "70-75", "Low-Med", "68-73");
+        yeastsArray.add(yeast);
+        yeast = new Yeasts("Wyeast 1388", "74-80", "Low", "64-80");
+        yeastsArray.add(yeast);
+        yeast = new Yeasts("WL380", "73-80", "Low", "66-70");
+        yeastsArray.add(yeast);
+        try {
+            if (mDB != null) {
+                mDB.beginTransaction();
+                for(int i = 0; i < yeastsArray.size(); i++) {
+                    values.put(DatabaseHelper.YeastsTableInfo.NAME, yeastsArray.get(i).getName());
+                    values.put(DatabaseHelper.YeastsTableInfo.ATTENUATION, yeastsArray.get(i).getAttenuation());
+                    values.put(DatabaseHelper.YeastsTableInfo.FLOCCULATION, yeastsArray.get(i).getFlocculation());
+                    values.put(DatabaseHelper.YeastsTableInfo.FERMENTING_TEMPERATURE, yeastsArray.get(i).getFermentingTemperature());
+                    mDB.insert(DatabaseHelper.YeastsTableInfo.TABLE_NAME, DatabaseHelper.HopsTableInfo.NAME, values);
+                }
+                mDB.setTransactionSuccessful();
+                mResult = true;
+            }
+            return mResult;
+        } finally {
+            mDB.endTransaction();
+        }
+    }
+
+    public List<String> getHopList() {
+        List<String> hopList = new ArrayList<String>();
+        String selectQuery = "SELECT " + DatabaseHelper.HopsTableInfo.NAME + " FROM " + DatabaseHelper.HopsTableInfo.TABLE_NAME + ";";
+        Cursor cursor = getReadableDatabase().rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                hopList.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return hopList;
+    }
+
+    public List<String> getYeastList() {
+        List<String> yeastList = new ArrayList<String>();
+        String selectQuery = "SELECT " + DatabaseHelper.YeastsTableInfo.NAME + " FROM " + DatabaseHelper.YeastsTableInfo.TABLE_NAME + ";";
+        Cursor cursor = getReadableDatabase().rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                yeastList.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return yeastList;
+    }
+
+    public List<String> getGrainList() {
+        List<String> grainList = new ArrayList<String>();
+        String selectQuery = "SELECT " + DatabaseHelper.GrainsTableInfo.NAME + " FROM " + DatabaseHelper.GrainsTableInfo.TABLE_NAME + ";";
+        Cursor cursor = getReadableDatabase().rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                grainList.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return grainList;
     }
 
     private class InsertTask extends AsyncTask<ContentValues, Void, Void> {
 
-        /**
-         * Override this method to perform a computation on a background thread. The
-         * specified parameters are the parameters passed to {@link #execute}
-         * by the caller of this task.
-         * <p/>
-         * This method can call {@link #publishProgress} to publish updates
-         * on the UI thread.
-         *
-         * @param params The parameters of the task.
-         * @return A result, defined by the subclass of this task.
-         * @see #onPreExecute()
-         * @see #onPostExecute
-         * @see #publishProgress
-         */
-        @Override
-        protected Void doInBackground(ContentValues... params) {
-            sInstance.getWritableDatabase().insert(DatabaseHelper.HopsTableInfo.TABLE_NAME, DatabaseHelper.HopsTableInfo.NAME, params[0]);
-            //getWritableDatabase().insert(DatabaseHelper.HopsTableInfo.TABLE_NAME, DatabaseHelper.HopsTableInfo.NAME, params[0]);
-            return null;
+        private String mTableName;
+
+        public InsertTask(String theTableName) {
+            mTableName = theTableName;
         }
 
-//        protected Cursor doQuery() {
-//            Cursor result = getReadableDatabase().query
-//                                                        (
-//                                                                DatabaseHelper.HopsTableInfo.TABLE_NAME,            //table
-//                                                                new String[]                                        //columns
-//                                                                        {
-//                                                                                DatabaseHelper.ID,
-//                                                                                DatabaseHelper.HopsTableInfo.NAME,
-//                                                                                DatabaseHelper.HopsTableInfo.ALPHA_ACID
-//                                                                        },
-//                                                                null,                                               //selection
-//                                                                null,                                               //selectionArgs
-//                                                                null,                                               //groupBy
-//                                                                null,                                               //having
-//                                                                DatabaseHelper.HopsTableInfo.NAME                   //orderBy
-//                                                        );
-//            result.getCount();
-//            return(result);
-//        }
+        @Override
+        protected Void doInBackground(ContentValues... params) {
+            switch (mTableName) {
+                case HopsTableInfo.TABLE_NAME:
+                    mDB.insert(mTableName, DatabaseHelper.HopsTableInfo.NAME, params[0]);
+                    break;
+                case YeastsTableInfo.TABLE_NAME:
+                    mDB.insert(mTableName, DatabaseHelper.YeastsTableInfo.NAME, params[0]);
+                    break;
+                case GrainsTableInfo.TABLE_NAME:
+                    mDB.insert(mTableName, DatabaseHelper.GrainsTableInfo.NAME, params[0]);
+                    break;
+                default:
+                    break;
+            }
+            return null;
+        }
     }
 }

@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context = ".CreateRecipeActivity">
+    
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/create_recipe_spacing">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="PLEASE FILL OUT ALL ROWS,"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="EMPTY/NULL OPTIONS ARE AVAILABLE"/>
+
+        <!--            NAME            -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing">
+    
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Recipe Name:  "/>
+            <EditText
+                android:id="@+id/input_recipe_name"
+                android:layout_width="@dimen/width_max_size"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    
+        <!--            BOIL TIME            -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing">
+    
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Boil Time (In Minutes):  "/>
+            <EditText
+                android:id="@+id/edit_boil_time"
+                android:layout_width="@dimen/width_min_size"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    
+        <!--            MASH?            -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing">
+    
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mash:  "/>
+            <Spinner
+                android:id="@+id/spinner_mash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    
+        <!--            MASH TEMP           -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing">
+    
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Boil Time (In Minutes):  "/>
+            <EditText
+                android:id="@+id/edit_mash_temp"
+                android:layout_width="@dimen/width_min_size"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    
+        <!--            BATCH SPARGE?            -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing">
+    
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Batch or Fly Sparge:  "/>
+            <Spinner
+                android:id="@+id/spinner_batch_or_fly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    
+        <!--            FERMENT TIME            -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing">
+    
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ferment Time (In Days):  "/>
+            <EditText
+                android:id="@+id/edit_ferment_time"
+                android:layout_width="@dimen/width_min_size"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    
+        <!--            SECONDARY FERMENT?            -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing">
+    
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Secondary Ferment:  "/>
+            <Spinner
+                android:id="@+id/spinner_secondary_ferment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    
+        <!--            SECONDARY FERMENT TIME            -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing">
+    
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Secondary Ferment Time (In Days):  "/>
+            <EditText
+                android:id="@+id/edit_secondary_ferment_time"
+                android:layout_width="@dimen/width_min_size"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    
+        <!--            SELECT MALT 1            -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing"
+            android:background="#ff83812d">
+    
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Malt #1:  "/>
+            <Spinner
+                android:id="@+id/spinner_malt_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    
+        <!--            SELECT MALT 2            -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing"
+            android:background="#ff83812d">
+    
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Malt #2:  "/>
+            <Spinner
+                android:id="@+id/spinner_malt_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    
+        <!--            SELECT MALT 3            -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing"
+            android:background="#ff83812d">
+    
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Malt #3:  "/>
+            <Spinner
+                android:id="@+id/spinner_malt_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    
+        <!--            SELECT MALT 4            -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing"
+            android:background="#ff83812d">
+    
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Malt #4:  "/>
+            <Spinner
+                android:id="@+id/spinner_malt_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    
+        <!--            SELECT MALT 5            -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing"
+            android:background="#ff83812d">
+    
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Malt #5:  "/>
+            <Spinner
+                android:id="@+id/spinner_malt_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        
+        <!--            HOP ADDITION 1          -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing"
+            android:background="#ff31672b">
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hop #1:  "/>
+            <Spinner
+                android:id="@+id/spinner_hops_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" @ "/>
+            <EditText
+                android:id="@+id/edit_hops_time_1"
+                android:layout_width="@dimen/width_min_size"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="min"/>
+                
+        </LinearLayout>
+
+        <!--            HOP ADDITION 2          -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing"
+            android:background="#ff31672b">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hop #2:  "/>
+            <Spinner
+                android:id="@+id/spinner_hops_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" @ "/>
+            <EditText
+                android:id="@+id/edit_hops_time_2"
+                android:layout_width="@dimen/width_min_size"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="min"/>
+
+        </LinearLayout>
+
+        <!--            HOP ADDITION 3          -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing"
+            android:background="#ff31672b">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hop #3:  "/>
+            <Spinner
+                android:id="@+id/spinner_hops_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" @ "/>
+            <EditText
+                android:id="@+id/edit_hops_time_3"
+                android:layout_width="@dimen/width_min_size"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="min"/>
+
+        </LinearLayout>
+
+        <!--            HOP ADDITION 4          -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing"
+            android:background="#ff31672b">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hop #4:  "/>
+            <Spinner
+                android:id="@+id/spinner_hops_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" @ "/>
+            <EditText
+                android:id="@+id/edit_hops_time_4"
+                android:layout_width="@dimen/width_min_size"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="min"/>
+
+        </LinearLayout>
+
+        <!--            HOP ADDITION 5          -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing"
+            android:background="#ff31672b">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hop #5:  "/>
+            <Spinner
+                android:id="@+id/spinner_hops_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" @ "/>
+            <EditText
+                android:id="@+id/edit_hops_time_5"
+                android:layout_width="@dimen/width_min_size"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="min"/>
+
+        </LinearLayout>
+
+        <!--            HOP ADDITION 6          -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/create_recipe_spacing"
+            android:background="#ff31672b">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hop #6:  "/>
+            <Spinner
+                android:id="@+id/spinner_hops_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" @ "/>
+            <EditText
+                android:id="@+id/edit_hops_time_6"
+                android:layout_width="@dimen/width_min_size"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="min"/>
+
+        </LinearLayout>
+
+        <!--            YEAST            -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="@dimen/create_recipe_spacing"
+            android:background="#fff5ffb3">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yeast:  "/>
+            <Spinner
+                android:id="@+id/spinner_yeast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_add_recipe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:text="ADD RECIPE"/>
+    </LinearLayout>
+</ScrollView>

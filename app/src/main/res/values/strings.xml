@@ -7,8 +7,12 @@
     <string name="title_activity_malts">MaltsActivity</string>
     <string name="title_activity_hops">HopsActivity</string>
     <string name="title_activity_yeasts">YeastsActivity</string>
+    <string name="title_activity_create_recipe">CreateRecipeActivity</string>
     <string name="add">Add</string>
+    <string name="delete">Delete</string>
     <string name="add_hops_title">Add Hops</string>
+    <string name="delete_hops_title">Delete Hops</string>
+    <string name="delete_recipes_title">Delete Recipe</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
 </resources>
