@@ -62,7 +62,6 @@ public class HopsActivity extends Activity {
                                             0                                               //Flags
                                         );
         mListView.setAdapter(adapter);
-        fab.hide(false);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
