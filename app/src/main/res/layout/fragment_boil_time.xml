@@ -1,0 +1,28 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragments.NameBeerFragment" >
+
+    <EditText
+        android:id="@+id/edit_boil_time"
+        android:layout_width="@dimen/width_max_size"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+    <TextView
+        android:id="@+id/text_boil_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/edit_boil_time"
+        android:text="What is your boil time (in minutes) ?" />
+    <Button
+        android:id="@+id/button_boil_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/edit_boil_time"
+        android:text="@string/next"/>
+
+</RelativeLayout>

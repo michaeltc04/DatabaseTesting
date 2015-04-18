@@ -36,7 +36,7 @@ public class HopsActivity extends Activity {
     private Cursor current;
 
     @InjectView(R.id.list_hops) ListView mListView;
-    @InjectView(R.id.fab) FloatingActionButton fab;
+    //@InjectView(R.id.fab) FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,19 +62,19 @@ public class HopsActivity extends Activity {
                                             0                                               //Flags
                                         );
         mListView.setAdapter(adapter);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                add();
-            }
-        });
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                add();
+//            }
+//        });
 
         if (current==null) {
             mDBHelper = DatabaseHelper.getInstance(mContext);
             mDatabase = mDBHelper.getWritableDatabase();
             new LoadCursorTask().execute();
         }
-        fab.attachToListView(mListView);
+        //fab.attachToListView(mListView);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

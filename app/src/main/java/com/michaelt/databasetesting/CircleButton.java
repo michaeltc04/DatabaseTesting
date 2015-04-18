@@ -74,6 +74,10 @@ public class CircleButton extends ImageView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int size = getResources().getDimensionPixelSize(R.dimen.fab_size_normal);
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+        int height = MeasureSpec.getSize(heightMeasureSpec);
+        setMeasuredDimension(size + 500, size);
     }
 
     @Override
