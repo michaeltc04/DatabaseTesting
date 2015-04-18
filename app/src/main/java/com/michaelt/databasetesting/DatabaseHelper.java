@@ -349,18 +349,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         @Override
         protected Void doInBackground(ContentValues... params) {
-            switch (mTableName) {
-                case HopsTableInfo.TABLE_NAME:
-                    mDB.insert(mTableName, DatabaseHelper.HopsTableInfo.NAME, params[0]);
-                    break;
-                case YeastsTableInfo.TABLE_NAME:
-                    mDB.insert(mTableName, DatabaseHelper.YeastsTableInfo.NAME, params[0]);
-                    break;
-                case GrainsTableInfo.TABLE_NAME:
-                    mDB.insert(mTableName, DatabaseHelper.GrainsTableInfo.NAME, params[0]);
-                    break;
-                default:
-                    break;
+            if (mTableName.equals(HopsTableInfo.TABLE_NAME)) {
+                mDB.insert(mTableName, HopsTableInfo.NAME, params[0]);
+
+            } else if (mTableName.equals(YeastsTableInfo.TABLE_NAME)) {
+                mDB.insert(mTableName, YeastsTableInfo.NAME, params[0]);
+
+            } else if (mTableName.equals(GrainsTableInfo.TABLE_NAME)) {
+                mDB.insert(mTableName, GrainsTableInfo.NAME, params[0]);
+
+            } else {
             }
             return null;
         }

@@ -19,6 +19,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -34,6 +36,7 @@ public class HopsActivity extends Activity {
     private Cursor current;
 
     @InjectView(R.id.list_hops) ListView mListView;
+    @InjectView(R.id.fab) FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +62,20 @@ public class HopsActivity extends Activity {
                                             0                                               //Flags
                                         );
         mListView.setAdapter(adapter);
+        fab.hide(false);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                add();
+            }
+        });
 
         if (current==null) {
             mDBHelper = DatabaseHelper.getInstance(mContext);
             mDatabase = mDBHelper.getWritableDatabase();
             new LoadCursorTask().execute();
         }
+        fab.attachToListView(mListView);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
