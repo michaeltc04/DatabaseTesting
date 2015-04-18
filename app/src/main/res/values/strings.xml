@@ -15,4 +15,5 @@
     <string name="delete_recipes_title">Delete Recipe</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="title_activity_insert">InsertActivity</string>
 </resources>

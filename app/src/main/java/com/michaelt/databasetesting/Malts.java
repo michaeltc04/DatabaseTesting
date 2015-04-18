@@ -27,4 +27,5 @@ public class Malts {
     public void setType(String theType) {
         this.myType = theType;
     }
+
 }
