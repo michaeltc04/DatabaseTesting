@@ -157,6 +157,8 @@ public class HopSelectionFragment extends Fragment {
         int h = getResources().getDisplayMetrics().heightPixels;
         int w = getResources().getDisplayMetrics().widthPixels;
 
+        mHopsNotice.setAlpha(0);
+
         mButton.animate().setDuration(200);
         mSpinner1.animate().setDuration(200);
         mSpinner2.animate().setDuration(200);

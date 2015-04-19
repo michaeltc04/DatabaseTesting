@@ -70,6 +70,8 @@ public class SpargeFragment extends Fragment {
         int h = getResources().getDisplayMetrics().heightPixels;
         int w = getResources().getDisplayMetrics().widthPixels;
 
+        mTextNotice.setAlpha(0);
+
         mButton.animate().setDuration(200);
         mSpinner.animate().setDuration(200);
         mTextView.animate().setDuration(200);
