@@ -2,9 +2,7 @@ package fragments;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.michaelt.databasetesting.CreateRecipeActivity;
 import com.michaelt.databasetesting.R;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 /**
  * Created by Michael on 4/17/2015.
@@ -25,9 +24,9 @@ public class BoilTimeFragment extends Fragment {
 
     private View mView;
     private FragmentTransaction ft;
-    private Button mButton;
-    private TextView mTextView;
-    private EditText mEditText;
+    @InjectView(R.id.button_boil_time) Button mButton;
+    @InjectView(R.id.edit_boil_time) EditText mEditText;
+    @InjectView(R.id.text_boil_time) TextView mTextView;
 
     @Override
     public void onResume() {
@@ -38,13 +37,9 @@ public class BoilTimeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         mView = inflater.inflate(R.layout.fragment_boil_time, container, false);
-
-        mButton = (Button) mView.findViewById(R.id.button_boil_time);
-        mEditText = (EditText) mView.findViewById(R.id.edit_boil_time);
-        mTextView = (TextView) mView.findViewById(R.id.text_boil_time);
-
+        ButterKnife.inject(this, mView);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,6 +59,10 @@ public class BoilTimeFragment extends Fragment {
         return mView;
     }
 
+    /**
+     * Runs an enter animation.
+     * Spinners, Button, and Main text come in from right.
+     */
     private void runEnterAnimation() {
         final long duration = (long) (ANIM_DURATION);
         int[] screenLocation = new int[2];
@@ -87,6 +86,12 @@ public class BoilTimeFragment extends Fragment {
         mTextView.animate().setDuration(duration).translationX(mTextView.getLeft());
     }
 
+    /**
+     * Runs exit animation.
+     * Spinners, Button, and Main text run out left.
+     *
+     * @param test
+     */
     private void runExitAnimation(final boolean test) {
         final long duration = (long) (ANIM_DURATION);
         int[] screenLocation = new int[2];

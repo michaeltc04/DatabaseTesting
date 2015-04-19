@@ -69,14 +69,10 @@ public class FermentingTimeFragment extends Fragment {
         return mView;
     }
 
-    private void loadNext() {
-        ft =     getFragmentManager()
-                .beginTransaction();
-        MaltSelectionFragment maltSelectionFragment = new MaltSelectionFragment();
-        ft.replace(R.id.frame_container, maltSelectionFragment);
-        ft.commit();
-    }
-
+    /**
+     * Runs an enter animation
+     * Button, TextViews and EditTexts come in from right.
+     */
     private void runEnterAnimation() {
         final long duration = (long) (ANIM_DURATION);
         int[] screenLocation = new int[2];
@@ -110,6 +106,10 @@ public class FermentingTimeFragment extends Fragment {
         mSecondaryText.animate().setDuration(duration).translationX(mSecondaryText.getLeft());
     }
 
+    /**
+     * Runs exit animation.
+     * Button, TextViews and EditTexts run out left.
+     */
     private void runExitAnimation() {
         final long duration = (long) (ANIM_DURATION);
         int[] screenLocation = new int[2];
@@ -153,7 +153,11 @@ public class FermentingTimeFragment extends Fragment {
                 .withEndAction(new Runnable() {
                     @Override
                     public void run() {
-                        loadNext();
+                        ft =     getFragmentManager()
+                                .beginTransaction();
+                        MaltSelectionFragment maltSelectionFragment = new MaltSelectionFragment();
+                        ft.replace(R.id.frame_container, maltSelectionFragment);
+                        ft.commit();
                     }
                 });
     }

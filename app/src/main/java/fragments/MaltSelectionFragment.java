@@ -1,6 +1,5 @@
 package fragments;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -11,15 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.michaelt.databasetesting.CreateRecipeActivity;
 import com.michaelt.databasetesting.R;
-
 import java.util.List;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 
 /**
  * Created by Michael on 4/17/2015.
@@ -76,6 +71,9 @@ public class MaltSelectionFragment extends Fragment {
         return mView;
     }
 
+    /**
+     * Sets all the Malt data from the Database into the spinners.
+     */
     private void setSpinners() {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, mMaltList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -86,6 +84,10 @@ public class MaltSelectionFragment extends Fragment {
         mSpinner5.setAdapter(adapter);
     }
 
+    /**
+     * Runs an enter animation.
+     * Spinners, Button, and Main text come in from right, the rest is already visible.
+     */
     private void runEnterAnimation() {
         final long duration = (long) (ANIM_DURATION);
         int[] screenLocation = new int[2];
@@ -125,6 +127,12 @@ public class MaltSelectionFragment extends Fragment {
         mTextView.animate().setDuration(duration).translationX(mTextView.getLeft());
     }
 
+    /**
+     * Runs exit animation.
+     * Spinners, Button, and Main text run out left, everything else fades out.
+     *
+     * @param test
+     */
     private void runExitAnimation(final boolean test) {
         final long duration = (long) (ANIM_DURATION);
         int[] screenLocation = new int[2];

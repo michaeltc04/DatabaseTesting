@@ -10,12 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.michaelt.databasetesting.CreateRecipeActivity;
 import com.michaelt.databasetesting.R;
-
 import java.util.List;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -64,6 +61,10 @@ public class YeastSelectionFragment extends Fragment {
         return mView;
     }
 
+    /**
+     * Runs an enter animation.
+     * Spinner, Button, and Main text come in from right.
+     */
     private void runEnterAnimation() {
         final long duration = (long) (ANIM_DURATION);
         int[] screenLocation = new int[2];
@@ -87,6 +88,10 @@ public class YeastSelectionFragment extends Fragment {
         mTextView.animate().setDuration(duration).translationX(mTextView.getLeft());
     }
 
+    /**
+     * Runs exit animation.
+     * Spinner, Button, and Main text run out left.
+     */
     private void runExitAnimation(final boolean test) {
         final long duration = (long) (ANIM_DURATION);
         int[] screenLocation = new int[2];

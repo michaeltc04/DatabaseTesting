@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.michaelt.databasetesting.CreateRecipeActivity;
 import com.michaelt.databasetesting.R;
 import java.util.List;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -120,7 +119,7 @@ public class HopSelectionFragment extends Fragment {
     }
 
     /**
-     * Sets all spinners with proper data retrieved from the database
+     * Sets all spinners with Hop data from the database.
      */
     private void setSpinners() {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, mHopList);
@@ -149,8 +148,8 @@ public class HopSelectionFragment extends Fragment {
     @InjectView(R.id.text_hops_notice) TextView mHopsNotice;
 
     /**
-     * Runs an enter animation
-     * Spinners, Button, and Main text come in from right, the rest is already available.
+     * Runs an enter animation.
+     * Spinners, Button, and Main text come in from right, the rest is already visible.
      */
     private void runEnterAnimation() {
         final long duration = (long) (ANIM_DURATION);

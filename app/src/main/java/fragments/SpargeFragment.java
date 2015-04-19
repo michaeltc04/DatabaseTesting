@@ -38,7 +38,7 @@ public class SpargeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         mView = inflater.inflate(R.layout.fragment_sparge, container, false);
         ButterKnife.inject(this, mView);
 
@@ -60,6 +60,10 @@ public class SpargeFragment extends Fragment {
         return mView;
     }
 
+    /**
+     * Runs an enter animation.
+     * Spinner, Button, and Main text come in from right, TextNotice fades in.
+     */
     private void runEnterAnimation() {
         final long duration = (long) (ANIM_DURATION);
         int[] screenLocation = new int[2];
@@ -86,6 +90,10 @@ public class SpargeFragment extends Fragment {
         mTextView.animate().setDuration(duration).translationX(mTextView.getLeft());
     }
 
+    /**
+     * Runs an exit animation.
+     * Spinner, Button, and Main text exit left, TextNotice fades out.
+     */
     private void runExitAnimation(final boolean test) {
         final long duration = (long) (ANIM_DURATION);
         int[] screenLocation = new int[2];

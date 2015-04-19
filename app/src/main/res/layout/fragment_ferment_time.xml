@@ -14,7 +14,7 @@
 
     <EditText
         android:id="@+id/edit_secondary_ferment_time"
-        android:layout_width="@dimen/width_max_size"
+        android:layout_width="@dimen/width_min_size"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:layout_centerHorizontal="true"
@@ -32,7 +32,7 @@
 
     <EditText
         android:id="@+id/edit_primary_ferment_time"
-        android:layout_width="@dimen/width_max_size"
+        android:layout_width="@dimen/width_min_size"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:layout_centerHorizontal="true"

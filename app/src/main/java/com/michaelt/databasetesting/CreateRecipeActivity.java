@@ -3,24 +3,16 @@ package com.michaelt.databasetesting;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Display;
-import android.widget.CursorAdapter;
-import android.widget.EditText;
-
 import java.util.List;
-
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import fragments.NameBeerFragment;
 
 /**
@@ -89,6 +81,14 @@ public class CreateRecipeActivity extends Activity {
 
     }
 
+    /**
+     * This method is called once the recipe creation process is finished.  All the data is saved
+     * into ContentValues and a background ASYNC Task is created to handle the insertion.
+     * Additional checks are needed currently.
+     *
+     * @param theFragment The current active fragment that launches this method,
+     *                    currently YeastSelectionFragment
+     */
     public void recipeCreated(Fragment theFragment) {
         ft = getFragmentManager().beginTransaction();
         ft.detach(theFragment);
@@ -122,65 +122,11 @@ public class CreateRecipeActivity extends Activity {
         new InsertTask().execute(cv);
     }
 
-    //INJECT ALL THE SPINNERS!!!!!!!!!!!!!
-//    @InjectView(R.id.spinner_hops_1) Spinner mHopsSpinner1;
-//    @InjectView(R.id.spinner_hops_2) Spinner mHopsSpinner2;
-//    @InjectView(R.id.spinner_hops_3) Spinner mHopsSpinner3;
-//    @InjectView(R.id.spinner_hops_4) Spinner mHopsSpinner4;
-//    @InjectView(R.id.spinner_hops_5) Spinner mHopsSpinner5;
-//    @InjectView(R.id.spinner_hops_6) Spinner mHopsSpinner6;
-//    @InjectView(R.id.spinner_malt_1) Spinner mMaltSpinner1;
-//    @InjectView(R.id.spinner_malt_2) Spinner mMaltSpinner2;
-//    @InjectView(R.id.spinner_malt_3) Spinner mMaltSpinner3;
-//    @InjectView(R.id.spinner_malt_4) Spinner mMaltSpinner4;
-//    @InjectView(R.id.spinner_malt_5) Spinner mMaltSpinner5;
-//    @InjectView(R.id.spinner_yeast) Spinner mYeastSpinner;
-//    @InjectView(R.id.spinner_batch_or_fly) Spinner mBatchFlySpinner;
-//    @InjectView(R.id.spinner_secondary_ferment) Spinner mSecondarySpinner;
-//    @InjectView(R.id.spinner_mash) Spinner mMashSpinner;
-//
-//    /**
-//     * Loads all the proper data into spinners for creating a recipe.
-//     */
-//    public void loadSpinnerData() {
-//        ArrayAdapter<String> hopDataAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, mHopList);
-//        ArrayAdapter<String> yeastDataAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, mYeastList);
-//        ArrayAdapter<String> maltDataAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, mGrainList);
-//        hopDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        yeastDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        maltDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//
-//        mHopsSpinner1.setAdapter(hopDataAdapter);
-//        mHopsSpinner2.setAdapter(hopDataAdapter);
-//        mHopsSpinner3.setAdapter(hopDataAdapter);
-//        mHopsSpinner4.setAdapter(hopDataAdapter);
-//        mHopsSpinner5.setAdapter(hopDataAdapter);
-//        mHopsSpinner6.setAdapter(hopDataAdapter);
-//
-//        mMaltSpinner1.setAdapter(maltDataAdapter);
-//        mMaltSpinner2.setAdapter(maltDataAdapter);
-//        mMaltSpinner3.setAdapter(maltDataAdapter);
-//        mMaltSpinner4.setAdapter(maltDataAdapter);
-//        mMaltSpinner5.setAdapter(maltDataAdapter);
-//
-//        mYeastSpinner.setAdapter(yeastDataAdapter);
-//
-//        List<String> batchOrSparge = new ArrayList<String>();
-//        batchOrSparge.add("Batch"); batchOrSparge.add("Fly"); batchOrSparge.add("Neither");
-//
-//        List<String> trueOrFalse = new ArrayList<String>();
-//        trueOrFalse.add("True"); trueOrFalse.add("False");
-//
-//        ArrayAdapter<String> trueOrFalseAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, trueOrFalse);
-//        ArrayAdapter<String> batchOrSpargeAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, batchOrSparge);
-//        trueOrFalseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        batchOrSpargeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//
-//        mBatchFlySpinner.setAdapter(batchOrSpargeAdapter);
-//        mMashSpinner.setAdapter(trueOrFalseAdapter);
-//        mSecondarySpinner.setAdapter(trueOrFalseAdapter);
-//    }
-
+    /**
+     * All information is lost if the user hits the back button.  This launches a AlertDialog
+     * so that the user can ensure that they want to lose all their progress in creating a new
+     * recipe.
+     */
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
@@ -198,6 +144,12 @@ public class CreateRecipeActivity extends Activity {
                 .show();
     }
 
+    /**
+     * Abstract class with a doQuery() method for returning an updated Cursor object to
+     * the user.  When finished the MainActivity is launched.
+     *
+     * @param <T>
+     */
     abstract private class BaseTask<T> extends AsyncTask<T, Void, Cursor> {
         @Override
         public void onPostExecute(Cursor result) {
@@ -223,6 +175,10 @@ public class CreateRecipeActivity extends Activity {
         }
     }
 
+    /**
+     * Loads the current Cursor with an updated version after a deletion / insertion
+     * on a background thread.
+     */
     private class LoadCursorTask extends BaseTask<Void> {
         @Override
         protected Cursor doInBackground(Void... params) {
@@ -230,6 +186,10 @@ public class CreateRecipeActivity extends Activity {
         }
     }
 
+    /**
+     * Inserts a recipe into the database from the passed in Content Values
+     * on a background thread.
+     */
     private class InsertTask extends BaseTask<ContentValues> {
         @Override
         protected Cursor doInBackground(ContentValues... values) {
@@ -243,6 +203,9 @@ public class CreateRecipeActivity extends Activity {
         }
     }
 
+    /**
+     * Deletes a recipe on a background thread based on the Recipe name.
+     */
     private class DeleteTask extends BaseTask<String> {
         @Override
         protected Cursor doInBackground(String... name) {

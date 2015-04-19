@@ -1,7 +1,6 @@
 package fragments;
 
 import android.app.AlertDialog;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -11,10 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.michaelt.databasetesting.CreateRecipeActivity;
 import com.michaelt.databasetesting.R;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -59,14 +56,10 @@ public class NameBeerFragment extends Fragment {
         return mView;
     }
 
-    private void loadNext() {
-        ft =     getFragmentManager()
-                .beginTransaction();
-        BoilTimeFragment boilTimeFragment = new BoilTimeFragment();
-        ft.replace(R.id.frame_container, boilTimeFragment);
-        ft.commit();
-    }
-
+    /**
+     * Runs an enter animation.
+     * EditText, Button, and Main text come in from right.
+     */
     private void runEnterAnimation() {
         final long duration = (long) (ANIM_DURATION);
         int[] screenLocation = new int[2];
@@ -90,6 +83,10 @@ public class NameBeerFragment extends Fragment {
         mTextView.animate().setDuration(duration).translationX(mTextView.getLeft());
     }
 
+    /**
+     * Runs exit animation.
+     * EditText, Button, and Main text run out left.
+     */
     private void runExitAnimation() {
         final long duration = (long) (ANIM_DURATION);
         int[] screenLocation = new int[2];
@@ -119,7 +116,11 @@ public class NameBeerFragment extends Fragment {
                 .withEndAction(new Runnable() {
                     @Override
                     public void run() {
-                        loadNext();
+                        ft =     getFragmentManager()
+                                .beginTransaction();
+                        BoilTimeFragment boilTimeFragment = new BoilTimeFragment();
+                        ft.replace(R.id.frame_container, boilTimeFragment);
+                        ft.commit();
                     }
                 });
     }
