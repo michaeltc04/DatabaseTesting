@@ -1,33 +1,33 @@
 package fragments;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.michaelt.databasetesting.CreateRecipeActivity;
 import com.michaelt.databasetesting.R;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 /**
  * Created by Michael on 4/17/2015.
  */
-public class BoilTimeFragment extends Fragment {
+public class SpargeFragment extends Fragment {
 
     private static final int ANIM_DURATION = 300;
 
     private View mView;
     private FragmentTransaction ft;
-    private Button mButton;
-    private TextView mTextView;
-    private EditText mEditText;
+    @InjectView(R.id.button_sparge_type) Button mButton;
+    @InjectView(R.id.spinner_sparge_type) Spinner mSpinner;
+    @InjectView(R.id.text_sparge_type) TextView mTextView;
+    @InjectView(R.id.text_sparge_notice) TextView mTextNotice;
 
     @Override
     public void onResume() {
@@ -39,26 +39,22 @@ public class BoilTimeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mView = inflater.inflate(R.layout.fragment_boil_time, container, false);
+        mView = inflater.inflate(R.layout.fragment_sparge, container, false);
+        ButterKnife.inject(this, mView);
 
-        mButton = (Button) mView.findViewById(R.id.button_boil_time);
-        mEditText = (EditText) mView.findViewById(R.id.edit_boil_time);
-        mTextView = (TextView) mView.findViewById(R.id.text_boil_time);
+        String[] items = new String[] { "None" , "Fly" , "Batch" };
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinner.setAdapter(adapter);
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String boilTime = mEditText.getText().toString();
-                if (boilTime.length() < 1) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setMessage("Under 10 minutes isn't much of a boil!").setTitle("Improper Boil Time");
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                } else {
-                    ((CreateRecipeActivity)getActivity()).mBoilTime = boilTime;
-                    runExitAnimation(true);
-                }
+                String spargeType = mSpinner.getSelectedItem().toString();
+                ((CreateRecipeActivity)getActivity()).mSpargeType = spargeType;
+                runExitAnimation(true);
             }
+
         });
 
         return mView;
@@ -71,16 +67,19 @@ public class BoilTimeFragment extends Fragment {
         int w = getResources().getDisplayMetrics().widthPixels;
 
         mButton.animate().setDuration(200);
-        mEditText.animate().setDuration(200);
+        mSpinner.animate().setDuration(200);
         mTextView.animate().setDuration(200);
+        mTextNotice.animate().setDuration(200);
+
+        mTextNotice.animate().alpha(1);
 
         mButton.getLocationOnScreen(screenLocation);
         mButton.setTranslationX(w);
         mButton.animate().setDuration(duration).translationX(mButton.getLeft());
 
-        mEditText.getLocationOnScreen(screenLocation);
-        mEditText.setTranslationX(w);
-        mEditText.animate().setDuration(duration).translationX(mEditText.getLeft());
+        mSpinner.getLocationOnScreen(screenLocation);
+        mSpinner.setTranslationX(w);
+        mSpinner.animate().setDuration(duration).translationX(mSpinner.getLeft());
 
         mTextView.getLocationOnScreen(screenLocation);
         mTextView.setTranslationX(w);
@@ -93,8 +92,11 @@ public class BoilTimeFragment extends Fragment {
         int mLeftDelta = 0;
 
         mButton.animate().setDuration(200);
-        mEditText.animate().setDuration(200);
+        mSpinner.animate().setDuration(200);
         mTextView.animate().setDuration(200);
+        mTextNotice.animate().setDuration(200);
+
+        mTextNotice.animate().alpha(0);
 
         mButton.getLocationOnScreen(screenLocation);
         mLeftDelta = 0 - screenLocation[0] - mButton.getWidth();
@@ -102,9 +104,9 @@ public class BoilTimeFragment extends Fragment {
                 .setDuration(duration)
                 .translationX(mLeftDelta);
 
-        mEditText.getLocationOnScreen(screenLocation);
-        mLeftDelta = 0 - screenLocation[0] - mEditText.getWidth();
-        mEditText.animate()
+        mSpinner.getLocationOnScreen(screenLocation);
+        mLeftDelta = 0 - screenLocation[0] - mSpinner.getWidth();
+        mSpinner.animate()
                 .setDuration(duration)
                 .translationX(mLeftDelta);
 
@@ -116,10 +118,9 @@ public class BoilTimeFragment extends Fragment {
                 .withEndAction(new Runnable() {
                     @Override
                     public void run() {
-                        ft = getFragmentManager()
-                                .beginTransaction();
-                        SpargeFragment spargeFragment = new SpargeFragment();
-                        ft.replace(R.id.frame_container, spargeFragment);
+                        ft = getFragmentManager().beginTransaction();
+                        FermentingTimeFragment fermentingTimeFragment = new FermentingTimeFragment();
+                        ft.replace(R.id.frame_container, fermentingTimeFragment);
                         ft.commit();
                     }
                 });

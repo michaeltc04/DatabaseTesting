@@ -1,0 +1,59 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragments.MaltSelectionFragment" >
+
+    <Spinner
+        android:id="@+id/spinner_select_malts_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/spinner_select_malts_2"
+        android:gravity="center" />
+    <Spinner
+        android:id="@+id/spinner_select_malts_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/spinner_select_malts_3"
+        android:gravity="center" />
+    <Spinner
+        android:id="@+id/spinner_select_malts_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/spinner_select_malts_4"
+        android:gravity="center" />
+    <Spinner
+        android:id="@+id/spinner_select_malts_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center" />
+    <Spinner
+        android:id="@+id/spinner_select_malts_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/spinner_select_malts_4"
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/button_select_malts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/spinner_select_malts_5"
+        android:text="@string/next"/>
+
+    <TextView
+        android:id="@+id/text_select_malts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/spinner_select_malts_1"
+        android:text="Select your malts:" />
+
+</RelativeLayout>

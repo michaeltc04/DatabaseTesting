@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">DatabaseTesting</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
     <string name="title_activity_recipes">RecipesActivity</string>
     <string name="title_activity_malts">MaltsActivity</string>
     <string name="title_activity_hops">HopsActivity</string>
     <string name="title_activity_yeasts">YeastsActivity</string>
     <string name="title_activity_create_recipe">CreateRecipeActivity</string>
+    <string name="title_activity_insert">InsertActivity</string>
+
     <string name="add">Add</string>
     <string name="delete">Delete</string>
     <string name="add_hops_title">Add Hops</string>
@@ -15,9 +15,9 @@
     <string name="delete_recipes_title">Delete Recipe</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-    <string name="title_activity_insert">InsertActivity</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="next">NEXT</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="hops_minute_warning">IF NO TIME ENTERED, 60 MIN IS DEFUALT</string>
+    <string name="sparge_notification">Select \"None\" if using only DME and/or LME</string>
 </resources>

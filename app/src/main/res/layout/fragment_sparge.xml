@@ -1,0 +1,45 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragments.SpargeFragment" >
+
+
+    <Button
+        android:id="@+id/button_sparge_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/next"/>
+
+    <Spinner
+        android:id="@+id/spinner_sparge_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/button_sparge_type"
+        android:gravity="center"
+        android:text="beer"/>
+
+    <TextView
+        android:id="@+id/text_sparge_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/spinner_sparge_type"
+        android:text="Are you doing a fly or batch sparge?" />
+
+    <TextView
+        android:id="@+id/text_sparge_notice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/button_sparge_type"
+        android:textColor="#FF0000"
+        android:textStyle="bold"
+        android:text="@string/sparge_notification"/>
+
+
+</RelativeLayout>

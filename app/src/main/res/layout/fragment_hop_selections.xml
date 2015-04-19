@@ -1,0 +1,225 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragments.HopSelectionFragment" >
+
+    <LinearLayout
+        android:id="@+id/linearlayout_select_hops_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearlayout_select_hops_2"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner_select_hops_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/text_fade_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" @ " />
+        <EditText
+            android:id="@+id/edit_select_hops_minutes_1"
+            android:layout_width="@dimen/width_min_size"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+        <TextView
+            android:id="@+id/text_fade_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" min" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout_select_hops_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearlayout_select_hops_3"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner_select_hops_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/text_fade_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" @ " />
+        <EditText
+            android:id="@+id/edit_select_hops_minutes_2"
+            android:layout_width="@dimen/width_min_size"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+        <TextView
+            android:id="@+id/text_fade_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" min" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout_select_hops_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearlayout_select_hops_4"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner_select_hops_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/text_fade_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" @ " />
+        <EditText
+            android:id="@+id/edit_select_hops_minutes_3"
+            android:layout_width="@dimen/width_min_size"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+        <TextView
+            android:id="@+id/text_fade_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" min" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout_select_hops_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner_select_hops_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/text_fade_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" @ " />
+        <EditText
+            android:id="@+id/edit_select_hops_minutes_4"
+            android:layout_width="@dimen/width_min_size"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+        <TextView
+            android:id="@+id/text_fade_8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" min" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout_select_hops_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearlayout_select_hops_4"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner_select_hops_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/text_fade_9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" @ " />
+        <EditText
+            android:id="@+id/edit_select_hops_minutes_5"
+            android:layout_width="@dimen/width_min_size"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+        <TextView
+            android:id="@+id/text_fade_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" min" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout_select_hops_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearlayout_select_hops_5"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner_select_hops_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/text_fade_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" @ " />
+        <EditText
+            android:id="@+id/edit_select_hops_minutes_6"
+            android:layout_width="@dimen/width_min_size"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+        <TextView
+            android:id="@+id/text_fade_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" min" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/button_select_hops"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/linearlayout_select_hops_6"
+        android:text="@string/next"/>
+    <TextView
+        android:id="@+id/text_select_hops"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/linearlayout_select_hops_1"
+        android:text="Select your hops:" />
+    <TextView
+        android:id="@+id/text_hops_notice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/button_select_hops"
+        android:textColor="#FF0000"
+        android:textStyle="bold"
+        android:text="@string/hops_minute_warning"/>
+
+</RelativeLayout>

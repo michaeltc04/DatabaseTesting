@@ -1,5 +1,6 @@
 package fragments;
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -10,7 +11,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.michaelt.databasetesting.CreateRecipeActivity;
 import com.michaelt.databasetesting.R;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 public class NameBeerFragment extends Fragment {
 
@@ -18,23 +24,35 @@ public class NameBeerFragment extends Fragment {
 
     private View mView;
     private FragmentTransaction ft;
-    private Button mButton;
-    private TextView mTextView;
-    private EditText mEditText;
+    @InjectView(R.id.button_name_your_beer) Button mButton;
+    @InjectView(R.id.edit_name_your_beer) EditText mEditText;
+    @InjectView(R.id.text_name_your_beer) TextView mTextView;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        runEnterAnimation();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        mView = inflater.inflate(R.layout.fragment_name_beer, container, false);
-        mButton = (Button) mView.findViewById(R.id.button_name_your_beer);
-        mEditText = (EditText) mView.findViewById(R.id.edit_name_your_beer);
-        mTextView = (TextView) mView.findViewById(R.id.text_name_your_beer);
 
+        mView = inflater.inflate(R.layout.fragment_name_beer, container, false);
+        ButterKnife.inject(this, mView);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                runExitAnimation();
+                String beerName = mEditText.getText().toString();
+                if (beerName.length() < 3) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setMessage("Name needs to be longer than 2 characters!").setTitle("Improper Name");
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                } else {
+                    ((CreateRecipeActivity)getActivity()).mBeerName = beerName;
+                    runExitAnimation();
+                }
             }
         });
 
@@ -49,14 +67,37 @@ public class NameBeerFragment extends Fragment {
         ft.commit();
     }
 
+    private void runEnterAnimation() {
+        final long duration = (long) (ANIM_DURATION);
+        int[] screenLocation = new int[2];
+        int h = getResources().getDisplayMetrics().heightPixels;
+        int w = getResources().getDisplayMetrics().widthPixels;
+
+        mButton.animate().setDuration(200);
+        mEditText.animate().setDuration(200);
+        mTextView.animate().setDuration(200);
+
+        mButton.getLocationOnScreen(screenLocation);
+        mButton.setTranslationX(w);
+        mButton.animate().setDuration(duration).translationX(mButton.getLeft());
+
+        mEditText.getLocationOnScreen(screenLocation);
+        mEditText.setTranslationX(w);
+        mEditText.animate().setDuration(duration).translationX(mEditText.getLeft());
+
+        mTextView.getLocationOnScreen(screenLocation);
+        mTextView.setTranslationX(w);
+        mTextView.animate().setDuration(duration).translationX(mTextView.getLeft());
+    }
+
     private void runExitAnimation() {
         final long duration = (long) (ANIM_DURATION);
         int[] screenLocation = new int[2];
         int mLeftDelta = 0;
 
-        mButton.animate().setDuration(300);
-        mEditText.animate().setDuration(300);
-        mTextView.animate().setDuration(300);
+        mButton.animate().setDuration(200);
+        mEditText.animate().setDuration(200);
+        mTextView.animate().setDuration(200);
 
         mButton.getLocationOnScreen(screenLocation);
         mLeftDelta = 0 - screenLocation[0] - mButton.getWidth();

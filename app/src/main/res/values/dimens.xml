@@ -3,6 +3,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="width_max_size">200dp</dimen>
-    <dimen name="width_min_size">30dp</dimen>
+    <dimen name="width_min_size">55dp</dimen>
     <dimen name="create_recipe_spacing">10dp</dimen>
 </resources>

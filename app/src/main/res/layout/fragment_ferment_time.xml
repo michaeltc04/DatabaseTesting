@@ -1,0 +1,51 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragments.FermentingTimeFragment" >
+
+    <Button
+        android:id="@+id/button_ferment_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/next"/>
+
+    <EditText
+        android:id="@+id/edit_secondary_ferment_time"
+        android:layout_width="@dimen/width_max_size"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/button_ferment_time"
+        android:text="0"/>
+
+    <TextView
+        android:id="@+id/text_secondary_ferment_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/edit_secondary_ferment_time"
+        android:layout_marginTop="10dp"
+        android:text="Secondary ferment time (in days) if applicable:" />
+
+    <EditText
+        android:id="@+id/edit_primary_ferment_time"
+        android:layout_width="@dimen/width_max_size"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/text_secondary_ferment_time"
+        android:text="8"/>
+
+    <TextView
+        android:id="@+id/text_primary_ferment_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/edit_primary_ferment_time"
+        android:text="Primary fermenting time (in days):" />
+
+
+</RelativeLayout>

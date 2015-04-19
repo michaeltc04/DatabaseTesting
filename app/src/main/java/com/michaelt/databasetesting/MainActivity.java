@@ -1,6 +1,7 @@
 package com.michaelt.databasetesting;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,6 +21,16 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
         getActionBar().setTitle("Brewer's Guide");
+
+        Intent i = getIntent();
+        if (i != null) {
+            if(i.getBooleanExtra("Recipe Added", false)) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Recipe Added Successfully").setTitle("Recipe Added");
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        }
     }
 
     @OnClick(R.id.button_recipes)

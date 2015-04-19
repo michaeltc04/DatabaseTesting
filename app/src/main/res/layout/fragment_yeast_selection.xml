@@ -3,31 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fragments.NameBeerFragment" >
-
+    tools:context="fragments.YeastSelectionFragment" >
 
     <Button
-        android:id="@+id/button_name_your_beer"
+        android:id="@+id/button_yeast_selection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="@string/next"/>
 
-    <EditText
-        android:id="@+id/edit_name_your_beer"
-        android:layout_width="@dimen/width_max_size"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/button_name_your_beer"
-        android:text="beer"/>
-
-    <TextView
-        android:id="@+id/text_name_your_beer"
+    <Spinner
+        android:id="@+id/spinner_yeast_selection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_above="@id/edit_name_your_beer"
-        android:text="Name your beer!" />
+        android:layout_above="@+id/button_yeast_selection"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/text_yeast_selection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/spinner_yeast_selection"
+        android:text="Select your yeast:" />
 
 
 </RelativeLayout>
